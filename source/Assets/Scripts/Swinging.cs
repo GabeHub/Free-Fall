@@ -7,6 +7,7 @@ public class Swinging : MonoBehaviour {
     private HingeJoint2D joint;
     private JointMotor2D motor;
     private int direction;
+    private float motorSpeed;
 
 	// Use this for initialization
 	void Start (){
@@ -16,6 +17,7 @@ public class Swinging : MonoBehaviour {
             direction = -1;
         }
         joint = GetComponent<HingeJoint2D>();
+        motorSpeed = joint.motor.motorSpeed;
         motor = joint.motor;
         motor.motorSpeed *= direction;
         joint.motor = motor;
@@ -25,12 +27,12 @@ public class Swinging : MonoBehaviour {
 	void Update () {
         if (joint.jointAngle >= joint.limits.max)
         {
-            motor.motorSpeed *= -1;
+            motor.motorSpeed = -motorSpeed;
             joint.motor = motor;
         }
         else if (joint.jointAngle <= joint.limits.min)
         {
-            motor.motorSpeed *= -1;
+            motor.motorSpeed = motorSpeed;
             joint.motor = motor;
         }
 	}

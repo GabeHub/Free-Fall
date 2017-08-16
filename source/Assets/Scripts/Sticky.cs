@@ -16,7 +16,7 @@ public class Sticky : MonoBehaviour {
 	void  Update() {
         if (isSticked)
         {            
-            if (gameObject.GetComponent<CircleCollider2D>().bounds.min.y >= player.transform.position.y + player.transform.localScale.y/2)
+            if ((gameObject.GetComponent<CircleCollider2D>().bounds.min.y >= player.transform.position.y + player.transform.localScale.y/2) || !player.GetComponent<Collider2D>())
             {
                 gameObject.GetComponent<FixedJoint2D>().enabled = false;
                 isSticked = false;

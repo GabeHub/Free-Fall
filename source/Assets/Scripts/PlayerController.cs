@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour {
 
     public float force;
+    public float glassToBreak;
     public Texture2D scoreTexture;
     public Texture2D bubbleTexture;
-    public float glassToBreak;
     public GUIStyle restartButtonStyle;
 
     private Rigidbody2D rb;
@@ -40,26 +40,26 @@ public class PlayerController : MonoBehaviour {
                 rb.AddForce(new Vector2(force, 0));
             }
         }
+
         if (bubble == null)
         {
             isImmortal = false;
         }
+
+        if (isDead)
+        {
+            Destroy(gameObject.GetComponent<Collider2D>());
+            rb.AddForce(new Vector2(0, force * 3));
+        }
 	}
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         int triggerHash = Animator.StringToHash("onHit");
         animator.SetTrigger(triggerHash);
         if (collision.gameObject.CompareTag("BadBonus") && !isImmortal)
         {
-            isDead = true;
-            animator.SetBool("isDead", isDead);
-        }
-        else if (collision.gameObject.CompareTag("Glass"))
-        {
-            if (rb.velocity.y <= glassToBreak)
-            {
-                Destroy(collision.gameObject);
-            }
+            Death(collision.gameObject.GetComponent<Collider2D>());
         }
     }
 
@@ -71,32 +71,61 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collision.gameObject.CompareTag("Bonus"))
+        if (!isDead)
         {
-            CollectDiamond(collision);
-        }
-        if (collision.gameObject.CompareTag("Bubble"))
-        {
-            CollectBubble(collision);
+            if (collider.gameObject.CompareTag("Bonus"))
+            {
+                CollectDiamond(collider);
+            }
+            else if (collider.gameObject.CompareTag("Bubble"))
+            {
+                CollectBubble(collider);
+            }
+            else if (collider.gameObject.CompareTag("Glass"))
+            {
+                if (rb.velocity.y <= glassToBreak)
+                {
+                    Destroy(collider.gameObject);
+                }
+            }
+            else if (collider.gameObject.CompareTag("Laser"))
+            {
+                Death(collider);
+            }
         }
     }
 
-    void CollectDiamond(Collider2D collision)
+    void Death(Collider2D collider)
+    {
+        isDead = true;
+        animator.SetBool("isDead", isDead);
+        if (collider.gameObject.CompareTag("Laser"))
+        {
+            //laser death animation
+        }
+        else
+        {
+            Destroy(gameObject);
+            //spike death animation
+        }
+    }
+
+    void CollectDiamond(Collider2D collider)
     {
         score++;
-        Destroy(collision.gameObject);
+        Destroy(collider.gameObject);
     }
 
-    void CollectBubble(Collider2D collision)
+    void CollectBubble(Collider2D collider)
     {
         if (bubble)
         {
             Destroy(bubble.gameObject);
         }
         isImmortal = true;
-        bubble = collision;
+        bubble = collider;
     }
 
     void DisplayScore()

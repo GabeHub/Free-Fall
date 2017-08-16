@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  effectorSpeed: 2.5
+  effectorSpeed: 2.8
   effectorForceScale: 0.05
 --- !u!212 &212101811550044656
 SpriteRenderer:

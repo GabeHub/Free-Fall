@@ -84,8 +84,12 @@ public class RoomGenerator : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        GenerateRoomIfRequired();
-        GenerateObstaclesIfRequired();
+        if (player)
+        {
+            GenerateRoomIfRequired();
+            GenerateObstaclesIfRequired();
+        }
+        else return;
     }
 
     void AddRoom(float farhtestRoomEndY)

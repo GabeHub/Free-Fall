@@ -23,6 +23,7 @@ public class Sliding : MonoBehaviour {
             direction = -1;
         }
         speed *= direction;
+        sf.speed *= direction;
     }
 	
 	// Update is called once per frame

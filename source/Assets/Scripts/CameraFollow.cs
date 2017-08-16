@@ -14,8 +14,12 @@ public class CameraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 newPosition = transform.position;
-        newPosition.y = target.transform.position.y + distance;
-        transform.position = newPosition;
+        if (target && target.GetComponent<Collider2D>())
+        {
+            Vector3 newPosition = transform.position;
+            newPosition.y = target.transform.position.y + distance;
+            transform.position = newPosition;
+        }
+        else return;
 	}
 }

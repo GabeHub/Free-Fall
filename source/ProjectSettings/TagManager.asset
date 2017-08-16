@@ -10,6 +10,7 @@ TagManager:
   - Glass
   - Sticky
   - Bubble
+  - Laser
   layers:
   - Default
   - TransparentFX
