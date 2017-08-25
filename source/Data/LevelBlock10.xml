@@ -1,0 +1,27 @@
+<Information>
+  <cell x="1" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="1" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="1" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="2" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="2" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="5" y="1" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="5" y="3" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="6" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="6" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="9" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="9" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="9" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="9" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="11" y="1" xSize="1" ySize="1" Type="rotatable" Rotation="0">spikes</cell>
+  <cell x="11" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="11" y="3" xSize="1" ySize="1" Type="rotatable" Rotation="0">spikes</cell>
+  <cell x="12" y="0" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="12" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="12" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="12" y="4" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="14" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="14" y="1" xSize="1" ySize="1" Type="rotatable" Rotation="270">spikes</cell>
+  <cell x="14" y="3" xSize="1" ySize="1" Type="rotatable" Rotation="90">spikes</cell>
+  <cell x="14" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="15" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+</Information>

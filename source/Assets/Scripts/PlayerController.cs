@@ -13,13 +13,20 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D rb;
     private Animator animator;
-    private float score = 0f;
+    private int score = 0;
     private bool isDead = false;
     private bool isImmortal = false;
     private Collider2D bubble;
+    [SerializeField]
+    private int lvl;
 
 	// Use this for initialization
 	void Start () {
+        if (PlayerPrefs.HasKey("Level"))
+        {
+            lvl = PlayerPrefs.GetInt("Level");
+        }
+        else lvl = 1;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 	}
@@ -27,6 +34,15 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         //Debug.Log(rb.velocity.y);
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            rb.AddForce(new Vector2(-force, 0));
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            rb.AddForce(new Vector2(force, 0));
+        }
+
         if (Input.GetButton("Fire1") && !isDead)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -87,7 +103,12 @@ public class PlayerController : MonoBehaviour {
             {
                 if (rb.velocity.y <= glassToBreak)
                 {
+                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 2);
                     Destroy(collider.gameObject);
+                }
+                else
+                {
+                    DestroyRow(collider);
                 }
             }
             else if (collider.gameObject.CompareTag("Laser"))
@@ -95,6 +116,12 @@ public class PlayerController : MonoBehaviour {
                 Death(collider);
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("Score", score + PlayerPrefs.GetInt("Score"));
+        PlayerPrefs.Save();
     }
 
     void Death(Collider2D collider)
@@ -106,15 +133,14 @@ public class PlayerController : MonoBehaviour {
             //laser death animation
         }
         else
-        {
-            Destroy(gameObject);
+        {            
             //spike death animation
         }
     }
 
     void CollectDiamond(Collider2D collider)
     {
-        score++;
+        score += lvl * 5;
         Destroy(collider.gameObject);
     }
 
@@ -161,6 +187,43 @@ public class PlayerController : MonoBehaviour {
         {
             //SceneManager.LoadScene(SceneManager.GetSceneByName("FreeFall").ToString());
             Application.LoadLevel(Application.loadedLevelName);
+        }
+    }
+
+    void DestroyRow(Collider2D collider)
+    {
+        float posY = collider.gameObject.transform.position.y + RoomGenerator.deltaY;
+        float posX = collider.transform.position.x;
+        bool flag = false;
+        for (int i = 0; i < RoomGenerator.raw; i++)
+        {
+            if (flag) break;
+            for (int j = 0; j < RoomGenerator.column; j++)
+            {
+                if (RoomGenerator.playerMatrix[i, j].xPosition == posX && RoomGenerator.playerMatrix[i, j].yPosition == posY)
+                {
+                    for (int k = j - 1; k >= 0; k--)
+                    {
+                        if (!RoomGenerator.playerMatrix[i, k].isEmpty && RoomGenerator.playerMatrix[i, k].obstacleName=="glassBlock")
+                        {
+                            Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
+                            RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                        }
+                        else break;
+                    }
+                    for (int k = j + 1; k < RoomGenerator.column; k++)
+                    {
+                        if (!RoomGenerator.playerMatrix[i, k].isEmpty && RoomGenerator.playerMatrix[i, k].obstacleName == "glassBlock")
+                        {
+                            Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
+                            RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                        }
+                        else break;
+                    }
+                    flag = true;
+                    break;
+                }
+            }
         }
     }
 }

@@ -11,10 +11,11 @@ public class LaserController : MonoBehaviour {
     private float timerCurrent = 0;
     private float timerPrevious = 0;
     private float timerDelta = 10;
+    private CapsuleCollider2D sticks;
 
     // Use this for initialization
     void Start () {
-		
+        sticks = GetComponent<CapsuleCollider2D>();
 	}
 	
 	// Update is called once per frame
@@ -28,7 +29,8 @@ public class LaserController : MonoBehaviour {
                 timerPrevious = timerCurrent;
             }
 
-            transform.Translate(Vector2.down * speed * Time.fixedDeltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
+            //transform.Translate(Vector2.down * speed * Time.fixedDeltaTime);
             if (transform.position.y - Camera.main.transform.position.y > 7)
             {
                 Respawn();
@@ -39,6 +41,6 @@ public class LaserController : MonoBehaviour {
 
     void Respawn()
     {
-        transform.position = new Vector2(0, Camera.main.transform.position.y + respawnPointY);
+        transform.position = new Vector2(player.transform.position.x, Camera.main.transform.position.y + respawnPointY);
     }
 }

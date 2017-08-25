@@ -119,8 +119,8 @@ GameObject:
   - component: {fileID: 942615308}
   - component: {fileID: 942615311}
   - component: {fileID: 942615310}
-  - component: {fileID: 942615307}
   - component: {fileID: 942615312}
+  - component: {fileID: 942615307}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -128,8 +128,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!70 &942615307
-CapsuleCollider2D:
+--- !u!61 &942615307
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -140,9 +140,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.13, y: -0.13}
-  m_Size: {x: 1.3, y: 2}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.17, y: 1.19}
+    newSize: {x: 1.11, y: 1.61}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!212 &942615308
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -175,12 +185,12 @@ SpriteRenderer:
   m_SortingLayerID: -288626843
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 06400dcceffed4341bfc786b7c7c83da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce74f7b615d33764a94ad3cdd9f7968e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.88, y: 2.38}
+  m_Size: {x: 1.11, y: 1.61}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -231,8 +241,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 15
   glassToBreak: -8
-  scoreTexture: {fileID: 2800000, guid: f6fff41f1c3790148b0af1bac6295bca, type: 3}
-  bubbleTexture: {fileID: 2800000, guid: 2969d9d996d986c44a014e74e79fd2d5, type: 3}
+  scoreTexture: {fileID: 2800000, guid: aa0ad1f41c2ee6c449cbb36c503d22e9, type: 3}
+  bubbleTexture: {fileID: 2800000, guid: 6a4a197dfa1a0fa4697cdf4f747a6bd8, type: 3}
   restartButtonStyle:
     m_Name: 
     m_Normal:
@@ -300,6 +310,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  lvl: 0
 --- !u!95 &942615312
 Animator:
   serializedVersion: 3
@@ -325,15 +336,15 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 990195928}
-  - component: {fileID: 990195927}
   - component: {fileID: 990195926}
+  - component: {fileID: 990195929}
   m_Layer: 0
   m_Name: laser
   m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &990195926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,31 +358,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   player: {fileID: 942615306}
---- !u!61 &990195927
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 990195925}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 8, y: 0.1}
-  m_EdgeRadius: 0
 --- !u!4 &990195928
 Transform:
   m_ObjectHideFlags: 0
@@ -385,6 +371,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &990195929
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 990195925}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 2}
+  m_Direction: 0
 --- !u!1 &1523260025
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,61 +434,35 @@ MonoBehaviour:
   obstacles:
   - objectPrefab: {fileID: 1187759248245962, guid: 8485b9820bf17f74d8fa1c5c38d7d0f5,
       type: 2}
-    xSize: 2
-    ySize: 2
-    xScaleCoefficient: 1
-    yScaleCoefficient: 1
   - objectPrefab: {fileID: 1455494240114672, guid: 4021cfffcb076f84388761a197f1851a,
       type: 2}
-    xSize: 1
-    ySize: 1
-    xScaleCoefficient: 1
-    yScaleCoefficient: 1
   - objectPrefab: {fileID: 1559322214926144, guid: a738c150b06bdf3408a2dff2cd3ef48e,
       type: 2}
-    xSize: 2
-    ySize: 2
-    xScaleCoefficient: 1
-    yScaleCoefficient: 1
   - objectPrefab: {fileID: 1632483676679400, guid: 561ae93311f5d1a4aa766bde0033cb87,
       type: 2}
-    xSize: 1
-    ySize: 1
-    xScaleCoefficient: 1
-    yScaleCoefficient: 1
   - objectPrefab: {fileID: 1255821432808630, guid: 88971d292a804494ea74bcfa6b05ee2d,
       type: 2}
-    xSize: 2
-    ySize: 1
-    xScaleCoefficient: 2
-    yScaleCoefficient: 1
-  - objectPrefab: {fileID: 1331104524648212, guid: 719f7c41a0997f347b285c4b1999ab83,
+  - objectPrefab: {fileID: 1691184564231612, guid: 6c5978573fd7ffc47b4215e06ff1ac00,
       type: 2}
-    xSize: 2
-    ySize: 2
-    xScaleCoefficient: 1
-    yScaleCoefficient: 1
   - objectPrefab: {fileID: 1035690629826474, guid: 275c8d47223b57e4e8822048bff2c05a,
       type: 2}
-    xSize: 4
-    ySize: 1
-    xScaleCoefficient: 2
-    yScaleCoefficient: 1
   - objectPrefab: {fileID: 1681149739906668, guid: 341a63fc6d050664f9e4155d20960e92,
       type: 2}
-    xSize: 1
-    ySize: 1
-    xScaleCoefficient: 1
-    yScaleCoefficient: 1
+  - objectPrefab: {fileID: 1450969264929338, guid: 6f6221c5d21f58b428d6997b7a2393ca,
+      type: 2}
+  - objectPrefab: {fileID: 1818159317252404, guid: 69180b29e56cd7340853c42f27baacd6,
+      type: 2}
+  - objectPrefab: {fileID: 1188017870431768, guid: 6d985eb67246204418a6710eb6117496,
+      type: 2}
+  - objectPrefab: {fileID: 1445226056775300, guid: e42947d542d7db342add41f14e6cf017,
+      type: 2}
+  - objectPrefab: {fileID: 1431440260855208, guid: 51884bde7612564439c51c9e9c5105bd,
+      type: 2}
   - objectPrefab: {fileID: 1502454863178988, guid: 7d0d2e447012436479ea0baabb4ddfb8,
       type: 2}
-    xSize: 1
-    ySize: 1
-    xScaleCoefficient: 1
-    yScaleCoefficient: 1
+  - objectPrefab: {fileID: 1113399112143830, guid: 12e22458fc4ceaf4c985cfca5611e2b6,
+      type: 2}
   currentObjects: []
-  xMatrix: 4
-  yMatrix: 8
 --- !u!114 &1523260028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,6 +475,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 942615306}
+  scoreTable:
+  - level: 1
+    score: 0
+  - level: 2
+    score: 10
+  - level: 3
+    score: 50
+  - level: 4
+    score: 100
 --- !u!1 &1756892321
 GameObject:
   m_ObjectHideFlags: 0

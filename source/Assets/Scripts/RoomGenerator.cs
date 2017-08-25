@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Xml;
+using System.IO;
 
 public class RoomGenerator : MonoBehaviour
 {
@@ -11,24 +13,6 @@ public class RoomGenerator : MonoBehaviour
     public GameObject[] availableRooms;
     public List<GameObject> currentRooms;
 
-    [System.Serializable]
-    public struct Obstacle
-    {
-        public GameObject objectPrefab;
-        public int xSize;
-        public int ySize;
-        public float xScaleCoefficient;
-        public float yScaleCoefficient;
-
-        public Obstacle(GameObject prefab, int xS, int yS, int xSC, int ySC)
-        {
-            objectPrefab = prefab;
-            xSize = xS;
-            ySize = yS;
-            xScaleCoefficient = xSC;
-            yScaleCoefficient = xSC;
-        }
-    }
     public Obstacle[] obstacles;
     
     public List<GameObject> currentObjects;
@@ -38,46 +22,58 @@ public class RoomGenerator : MonoBehaviour
         public float xPosition;
         public float yPosition;
         public bool isEmpty;
-
-        public ObstacleMatrixCell(float xPos, float yPos, bool empty)
-        {
-            xPosition = xPos;
-            yPosition = yPos;
-            isEmpty = empty;
-        }
+        public string obstacleName;
+        public Direction gearDirection;
+        public int rotation;
+        public GameObject obstacle;
+        public int obstacleSizeX;
+        public int obstacleSizeY;
     }
-    public int xMatrix = 4;
-    public int yMatrix = 10;
+
+    public static int raw = 19;
+    public static int column = 5;
+
     private ObstacleMatrixCell[,] matrix;
+    public static ObstacleMatrixCell[,] playerMatrix;
     private ObstacleMatrixCell cell;
 
     private float height;
     private float width;
-    
+    private float borders = 0.55f;
+
     private float deltaX;
-    private float deltaY;
+    public static float deltaY;
+
+    private string levelPath = "Data/LevelBlock";
+    private int levelNumber = 1;
 
     // Use this for initialization
     void Start()
     {
         height = 2.0f * Camera.main.orthographicSize;
-        width = height * Camera.main.aspect;
+        width = height * Camera.main.aspect - borders;
 
-        deltaX = (width / xMatrix);
-        deltaY = (height / yMatrix);
+        deltaX = (width / column);
+        deltaY = (2.0f * height / raw);
 
-        SortObstacles();
+        //SortObstacles();
 
-        float firstRoomPosition = height * 0.5f;
+        float firstRoomPosition = 2.0f * height * 0.5f;
         AddRoom(firstRoomPosition);
-        float playerSize = width * 0.1f;
-        player.transform.localScale = new Vector3(playerSize, playerSize, 1);
+        //float playerSize = width * 0.1f;
+        //player.transform.localScale = new Vector3(playerSize, playerSize, 1);
 
         float xPos = -(width * 0.5f) + deltaX * 0.5f;
-        float yPos = (height * 0.5f) - deltaY * 0.5f;
-        cell = new ObstacleMatrixCell(xPos, yPos, true);
+        float yPos = (2.0f * height * 0.5f) - deltaY * 0.5f;
+        cell = new ObstacleMatrixCell()
+        {
+            xPosition = xPos,
+            yPosition = yPos,
+            isEmpty = true
+        };
 
-        matrix = new ObstacleMatrixCell[xMatrix, yMatrix];
+        matrix = new ObstacleMatrixCell[raw, column];
+        playerMatrix = new ObstacleMatrixCell[raw, column];
         MatrixUpdate(cell);
     }
 
@@ -86,6 +82,7 @@ public class RoomGenerator : MonoBehaviour
     {
         if (player)
         {
+            InitPlayerMatrix();
             GenerateRoomIfRequired();
             GenerateObstaclesIfRequired();
         }
@@ -138,11 +135,11 @@ public class RoomGenerator : MonoBehaviour
 
     void MatrixUpdate(ObstacleMatrixCell cell)
     {
-        for (int i = 0; i < yMatrix; i++)
+        for (int i = 0; i < raw; i++)
         {
-            for (int j = 0; j < xMatrix; j++)
+            for (int j = 0; j < column; j++)
             {
-                matrix[j, i] = cell;
+                matrix[i, j] = cell;
                 cell.xPosition += deltaX;
             }
             cell.xPosition = -(width * 0.5f) + deltaX * 0.5f;
@@ -152,12 +149,14 @@ public class RoomGenerator : MonoBehaviour
 
     void GenerateObstaclesIfRequired()
     {
-        if ((player.transform.position.y - height) < matrix[xMatrix - 1, yMatrix - 1].yPosition)
+        if ((player.transform.position.y - height) < matrix[raw - 1, column - 1].yPosition)
         {
-            cell.xPosition = matrix[0, yMatrix - 1].xPosition;
-            cell.yPosition = matrix[0, yMatrix - 1].yPosition - deltaY;
+            cell.xPosition = matrix[raw - 1, 0].xPosition;
+            cell.yPosition = matrix[raw - 1, 0].yPosition - deltaY;
             cell.isEmpty = true;
             MatrixUpdate(cell);
+            InitMatrix(levelNumber);
+            LevelUpdate();
             MatrixFilling();
         }
 
@@ -184,99 +183,17 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 
-    void SortObstacles()
-    {
-        Obstacle temp = new Obstacle();
-        for (int k = obstacles.Length - 1; k > 0; k--)
-        {
-            for (int i = 0; i < k; i++)
-            {
-                float sizeCurrent = obstacles[i].xSize * obstacles[i].ySize;
-                float sizeNext = obstacles[i + 1].xSize * obstacles[i + 1].ySize;
-                if (sizeCurrent < sizeNext)
-                {
-                    temp = obstacles[i];
-                    obstacles[i] = obstacles[i + 1];
-                    obstacles[i + 1] = temp;
-                }
-            }
-        }
-    }
-
-    Obstacle SelectRandomObstacle(int left)
-    {
-        int rand = 0;
-        int right = obstacles.Length;
-        float sizeCurrent = obstacles[left].xSize * obstacles[left].ySize;
-        float sizePrevious = obstacles[left].xSize * obstacles[left].ySize;
-
-        if (sizeCurrent > 1)
-        {
-            for (int i = left + 1; i < right; i++)
-            {
-                sizeCurrent = obstacles[i].xSize * obstacles[i].ySize;
-                if (sizeCurrent < sizePrevious)
-                {
-                    right = i;
-                    break;
-                }
-                sizePrevious = sizeCurrent;
-            }
-        }
-
-        rand = Random.Range(left, right);
-        return obstacles[rand];
-    }
-
-    List<ObstacleMatrixCell> FindPositions(int xLength, int yLength)
-    {
-        bool flag = false;
-        List<ObstacleMatrixCell> cells = new List<ObstacleMatrixCell>();
-
-        for (int i = 0; i <= yMatrix - yLength; i++)
-        {
-            for (int j = 0; j <= xMatrix - xLength; j++)
-            {
-                for (int k = i; k < i + yLength; k++)
-                {
-                    for(int l = j; l < j + xLength; l++)
-                    {
-                        if (!matrix[l, k].isEmpty)
-                        {
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if (flag)
-                    {
-                        break;
-                    }
-                }
-                if (!flag)
-                {
-                    cells.Add(matrix[j, i]);
-                }
-                else
-                {
-                    flag = false;
-                }
-            }
-        }
-
-        return cells;
-    }
-
     void AddObstacle(ObstacleMatrixCell cell, Obstacle obstacle)
     {
         int xPos = 0, yPos = 0;
-        for (int i = 0; i < yMatrix; i++)
+        for (int i = 0; i < raw; i++)
         {
-            for(int j = 0; j < xMatrix; j++)
+            for(int j = 0; j < column; j++)
             {
-                if (matrix[j,i].xPosition == cell.xPosition && matrix[j,i].yPosition == cell.yPosition)
+                if (matrix[i, j].xPosition == cell.xPosition && matrix[i, j].yPosition == cell.yPosition)
                 {
-                    xPos = j;
-                    yPos = i;
+                    xPos = i;
+                    yPos = j;
                     break;
                 }
             }
@@ -284,49 +201,124 @@ public class RoomGenerator : MonoBehaviour
 
         int count = 0;
         float obstaclePositionX = 0, obstaclePositionY = 0;
-        for (int i = yPos; i < yPos + obstacle.ySize; i++)
+        for (int i = xPos; i < xPos + cell.obstacleSizeY; i++)
         {
-            for (int j = xPos; j < xPos + obstacle.xSize; j++)
+            for (int j = yPos; j < yPos + cell.obstacleSizeX; j++)
             {
-                matrix[j, i].isEmpty = false;
+                matrix[i, j].isEmpty = false;
                 count++;
-                obstaclePositionX += matrix[j, i].xPosition;
-                obstaclePositionY += matrix[j, i].yPosition;
+                obstaclePositionX += matrix[i, j].xPosition;
+                obstaclePositionY += matrix[i, j].yPosition;
             }
         }
-
         obstaclePositionX /= count;
         obstaclePositionY /= count;
 
         GameObject obj = Instantiate(obstacle.objectPrefab);
         obj.transform.position = new Vector2(obstaclePositionX, obstaclePositionY);
-        float size = width * 0.05f;
-        obj.transform.localScale = new Vector3(size * obstacle.xScaleCoefficient, size * obstacle.yScaleCoefficient, 1);
+        if (cell.rotation != 0)
+        {
+            obj.transform.Rotate(Vector3.forward * cell.rotation);
+        }
+        if (cell.gearDirection != 0)
+        {
+            obj.GetComponentInChildren<Rotation>().direction = cell.gearDirection;
+        }
+        //float size = width * 0.05f;
+        //obj.transform.localScale = new Vector3(size, size, 1);
         currentObjects.Add(obj);
+
+        for (int i = xPos; i < xPos + cell.obstacleSizeY; i++)
+        {
+            for (int j = yPos; j < yPos + cell.obstacleSizeX; j++)
+            {
+                matrix[i, j].isEmpty = false;
+                matrix[i, j].obstacle = obj;
+                matrix[i, j].obstacleName = obj.name;
+            }
+        }
     }
 
     void MatrixFilling()
     {
-        int startPosition = 0;
-        for (int i = 0; i < 10; i++)
+        Obstacle obstacle = new Obstacle();
+        for (int i = 0; i < raw; i++)
         {
-            if (startPosition >= obstacles.Length)
+            for (int j = 0; j < column; j++)
             {
-                break;
+                if (!matrix[i,j].isEmpty && !matrix[i,j].obstacle)
+                {
+                    foreach(var obs in obstacles)
+                    {
+                        if(matrix[i,j].obstacleName == obs.objectPrefab.name)
+                        {
+                            obstacle = obs;
+                        }
+                    }
+                    AddObstacle(matrix[i, j], obstacle);
+                }
             }
-            Obstacle obstacle = SelectRandomObstacle(startPosition);
-            List<ObstacleMatrixCell> positions = FindPositions(obstacle.xSize, obstacle.ySize);
-            if (positions.Count != 0)
+        }
+    }
+
+    void InitPlayerMatrix()
+    {
+        if(player.transform.position.y <= matrix[0, 0].yPosition && matrix[0, 0].yPosition < playerMatrix[0, 0].yPosition)
+        {
+            for (int i = 0; i < raw; i++)
             {
-                int rand = Random.Range(0, positions.Count);
-                ObstacleMatrixCell position = positions[rand];
-                AddObstacle(position, obstacle);
+                for (int j = 0; j < column; j++)
+                {
+                    playerMatrix[i, j] = matrix[i, j];
+                }
             }
-            else
+        }
+    }
+
+    void InitMatrix(int number)
+    {
+        if (File.Exists(levelPath + number + ".xml"))
+        {
+            XmlTextReader xtr;
+
+            for (int i = 0; i < raw; i++)
             {
-                startPosition++;
-                i--;
+                for (int j = 0; j < column; j++)
+                {
+                    xtr = new XmlTextReader(levelPath + number + ".xml");
+                    while (xtr.Read())
+                    {
+                        if (xtr.IsStartElement("cell") && !xtr.IsEmptyElement && int.Parse(xtr.GetAttribute("x").ToString()) == i && int.Parse(xtr.GetAttribute("y").ToString()) == j)
+                        {
+                            matrix[i, j].isEmpty = false;
+                            matrix[i, j].obstacleSizeX = int.Parse(xtr.GetAttribute("xSize").ToString());
+                            matrix[i, j].obstacleSizeY = int.Parse(xtr.GetAttribute("ySize").ToString());
+                            if (xtr.GetAttribute("Type").ToString() == "gear")
+                            {
+                                if (xtr.GetAttribute("Direction").ToString() == "left")
+                                    matrix[i, j].gearDirection = Direction.left;
+                                else matrix[i, j].gearDirection = Direction.right;
+                            }
+                            if (xtr.GetAttribute("Type").ToString() == "rotatable")
+                            {
+                                matrix[i, j].rotation = int.Parse(xtr.GetAttribute("Rotation").ToString());
+                            }
+                            matrix[i, j].obstacleName = xtr.ReadString();
+                        }
+                    }
+                }
             }
+        }
+        else Debug.Log("There is no such file: " + levelPath + number + ".xml");
+    }
+
+    void LevelUpdate()
+    {
+        levelNumber++;
+        if (levelNumber == 12)
+        {
+            levelNumber = 1;
+            levelPath = "Data/LevelG2Block";
         }
     }
 }

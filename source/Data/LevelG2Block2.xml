@@ -1,0 +1,16 @@
+<Information>
+  <cell x="2" y="1" xSize="3" ySize="3" Type="gear" Direction="right">gear1</cell>
+  <cell x="3" y="0" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="3" y="4" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="5" y="0" xSize="1" ySize="1" Type="glassCorner">glassCorner4</cell>
+  <cell x="5" y="3" xSize="2" ySize="3" Type="gear" Direction="left">gear2</cell>
+  <cell x="7" y="0" xSize="2" ySize="3" Type="gear" Direction="left">gear2</cell>
+  <cell x="9" y="3" xSize="2" ySize="1" Type="gear" Direction="left">gear3</cell>
+  <cell x="11" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="11" y="3" xSize="2" ySize="1" Type="rotatable" Rotation="0">spikes</cell>
+  <cell x="12" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="12" y="3" xSize="2" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="14" y="1" xSize="1" ySize="1" Type="glassCorner">glassCorner1</cell>
+  <cell x="14" y="2" xSize="1" ySize="1" Type="glassCorner">glassCorner4</cell>
+  <cell x="15" y="3" xSize="2" ySize="1" Type="gear" Direction="right">gear3</cell>
+</Information>
