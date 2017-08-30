@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour {
 
     public Score[] scoreTable;
 
-    private float globalTimer = 0;
-
 	// Use this for initialization
 	void Start () {
 
@@ -30,10 +28,6 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (player)
-        {
-            globalTimer += Time.deltaTime;
-        }
         if (Input.GetKeyDown(KeyCode.D))
         {
             PlayerPrefs.DeleteAll();

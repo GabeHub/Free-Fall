@@ -108,7 +108,10 @@ public class PlayerController : MonoBehaviour {
                 }
                 else
                 {
-                    DestroyRow(collider);
+                    if (collider.gameObject.name == "glassBlock")
+                    {
+                        DestroyRow(collider);
+                    }
                 }
             }
             else if (collider.gameObject.CompareTag("Laser"))
@@ -204,19 +207,43 @@ public class PlayerController : MonoBehaviour {
                 {
                     for (int k = j - 1; k >= 0; k--)
                     {
-                        if (!RoomGenerator.playerMatrix[i, k].isEmpty && RoomGenerator.playerMatrix[i, k].obstacleName=="glassBlock")
+                        if (!RoomGenerator.playerMatrix[i, k].isEmpty)
                         {
-                            Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
-                            RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                            if(RoomGenerator.playerMatrix[i, k].obstacle)
+                            {
+                                if (RoomGenerator.playerMatrix[i, k].obstacle.CompareTag("Glass"))
+                                {
+                                    Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
+                                    RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                                }
+                                else break;
+                            }
+                            else
+                            {
+                                RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                                break;
+                            }
                         }
                         else break;
                     }
                     for (int k = j + 1; k < RoomGenerator.column; k++)
                     {
-                        if (!RoomGenerator.playerMatrix[i, k].isEmpty && RoomGenerator.playerMatrix[i, k].obstacleName == "glassBlock")
+                        if (!RoomGenerator.playerMatrix[i, k].isEmpty)
                         {
-                            Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
-                            RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                            if(RoomGenerator.playerMatrix[i, k].obstacle)
+                            {
+                                if (RoomGenerator.playerMatrix[i, k].obstacle.CompareTag("Glass"))
+                                {
+                                    Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
+                                    RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                                }
+                                else break;
+                            }
+                            else
+                            {
+                                RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                                break;
+                            }
                         }
                         else break;
                     }

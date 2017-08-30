@@ -6,8 +6,6 @@ using System.IO;
 
 public class RoomGenerator : MonoBehaviour
 {
-
-
     public GameObject player;
 
     public GameObject[] availableRooms;
@@ -44,7 +42,7 @@ public class RoomGenerator : MonoBehaviour
     private float deltaX;
     public static float deltaY;
 
-    private string levelPath = "Data/LevelBlock";
+    public static string levelPath;
     private int levelNumber = 1;
 
     // Use this for initialization
@@ -68,13 +66,16 @@ public class RoomGenerator : MonoBehaviour
         cell = new ObstacleMatrixCell()
         {
             xPosition = xPos,
-            yPosition = yPos,
+            yPosition = yPos - height,
             isEmpty = true
         };
 
         matrix = new ObstacleMatrixCell[raw, column];
         playerMatrix = new ObstacleMatrixCell[raw, column];
         MatrixUpdate(cell);
+        InitMatrix(levelNumber);
+        LevelUpdate();
+        MatrixFilling();
     }
 
     // Update is called once per frame

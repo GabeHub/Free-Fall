@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F9FA9C3F-A011-7856-D2DE-9202ADC01A79}</ProjectGuid>
+    <ProjectGuid>{F54273C0-A31A-66C4-E9F6-C0A4164AFFCF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LaserController.cs" />
+    <Compile Include="Assets\Scripts\MainScreenManager.cs" />
     <Compile Include="Assets\Scripts\Obstacles.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\RoomGenerator.cs" />
