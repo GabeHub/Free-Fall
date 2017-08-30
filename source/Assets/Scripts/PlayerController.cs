@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
     public float force;
+    public float torque;
     public float glassToBreak;
     public Texture2D scoreTexture;
     public Texture2D bubbleTexture;
     public GUIStyle restartButtonStyle;
+    public ParallaxScroll parallax;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -34,13 +35,17 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         //Debug.Log(rb.velocity.y);
+        parallax.offset = transform.position.y;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             rb.AddForce(new Vector2(-force, 0));
+            rb.AddTorque(torque);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
+
             rb.AddForce(new Vector2(force, 0));
+            rb.AddTorque(-torque);
         }
 
         if (Input.GetButton("Fire1") && !isDead)
@@ -50,10 +55,12 @@ public class PlayerController : MonoBehaviour {
             if (mouseToPlayer > 0)
             {
                 rb.AddForce(new Vector2(-force, 0));
+                rb.AddTorque(torque);
             }
             if (mouseToPlayer < 0)
             {
                 rb.AddForce(new Vector2(force, 0));
+                rb.AddTorque(-torque);
             }
         }
 
@@ -93,6 +100,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (collider.gameObject.CompareTag("Bonus"))
             {
+                SetIsEmptyToTrue(collider);
                 CollectDiamond(collider);
             }
             else if (collider.gameObject.CompareTag("Bubble"))
@@ -103,12 +111,13 @@ public class PlayerController : MonoBehaviour {
             {
                 if (rb.velocity.y <= glassToBreak)
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 2);
+                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 20);
+                    SetIsEmptyToTrue(collider);
                     Destroy(collider.gameObject);
                 }
                 else
                 {
-                    if (collider.gameObject.name == "glassBlock")
+                    if (collider.gameObject.name == "glassBlock(Clone)")
                     {
                         DestroyRow(collider);
                     }
@@ -143,7 +152,7 @@ public class PlayerController : MonoBehaviour {
 
     void CollectDiamond(Collider2D collider)
     {
-        score += lvl * 5;
+        score += lvl;
         Destroy(collider.gameObject);
     }
 
@@ -205,48 +214,54 @@ public class PlayerController : MonoBehaviour {
             {
                 if (RoomGenerator.playerMatrix[i, j].xPosition == posX && RoomGenerator.playerMatrix[i, j].yPosition == posY)
                 {
-                    for (int k = j - 1; k >= 0; k--)
+                    if (RoomGenerator.playerMatrix[i, j].obstacle) { }
+                    else
                     {
-                        if (!RoomGenerator.playerMatrix[i, k].isEmpty)
+                        for (int k = j - 1; k >= 0; k--)
                         {
-                            if(RoomGenerator.playerMatrix[i, k].obstacle)
+                            if (!RoomGenerator.playerMatrix[i, k].isEmpty)
                             {
                                 if (RoomGenerator.playerMatrix[i, k].obstacle.CompareTag("Glass"))
-                                {
-                                    Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
-                                    RoomGenerator.playerMatrix[i, k].isEmpty = true;
-                                }
-                                else break;
+                                    {
+                                        Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
+                                        RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                                    }
+                                    else break;
                             }
-                            else
-                            {
-                                RoomGenerator.playerMatrix[i, k].isEmpty = true;
-                                break;
-                            }
+                            else break;
                         }
-                        else break;
-                    }
-                    for (int k = j + 1; k < RoomGenerator.column; k++)
-                    {
-                        if (!RoomGenerator.playerMatrix[i, k].isEmpty)
+                        for (int k = j + 1; k < RoomGenerator.column; k++)
                         {
-                            if(RoomGenerator.playerMatrix[i, k].obstacle)
+                            if (!RoomGenerator.playerMatrix[i, k].isEmpty)
                             {
                                 if (RoomGenerator.playerMatrix[i, k].obstacle.CompareTag("Glass"))
-                                {
-                                    Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
-                                    RoomGenerator.playerMatrix[i, k].isEmpty = true;
-                                }
-                                else break;
+                                    {
+                                        Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
+                                        RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                                    }
+                                    else break;
                             }
-                            else
-                            {
-                                RoomGenerator.playerMatrix[i, k].isEmpty = true;
-                                break;
-                            }
+                            else break;
                         }
-                        else break;
+                        flag = true;
+                        break;
                     }
+                }
+            }
+        }
+    }
+
+    public void SetIsEmptyToTrue(Collider2D collider)
+    {
+        bool flag = false;
+        for (int i = 0; i < RoomGenerator.raw; i++)
+        {
+            if (flag) break;
+            for (int j = 0; j < RoomGenerator.column; j++)
+            {
+                if (RoomGenerator.playerMatrix[i, j].xPosition == collider.gameObject.transform.position.x && RoomGenerator.playerMatrix[i, j].yPosition == collider.gameObject.transform.position.y)
+                {
+                    RoomGenerator.playerMatrix[i, j].isEmpty = true;
                     flag = true;
                     break;
                 }

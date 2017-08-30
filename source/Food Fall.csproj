@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\LaserController.cs" />
     <Compile Include="Assets\Scripts\MainScreenManager.cs" />
     <Compile Include="Assets\Scripts\Obstacles.cs" />
+    <Compile Include="Assets\Scripts\ParallaxScroll.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\RoomGenerator.cs" />
     <Compile Include="Assets\Scripts\Rotation.cs" />
