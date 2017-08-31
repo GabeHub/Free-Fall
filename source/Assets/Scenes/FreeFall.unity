@@ -240,7 +240,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 942615306}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 6fefba7d48ca76d4d84e038f100f4aae, type: 2}
   m_IsTrigger: 0
@@ -345,9 +345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f80c5a95c76dd043a6c5a344885607f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 30
-  torque: 20
-  glassToBreak: -25
+  force: 20
+  torque: 10
+  glassToBreak: -20
   scoreTexture: {fileID: 2800000, guid: aa0ad1f41c2ee6c449cbb36c503d22e9, type: 3}
   bubbleTexture: {fileID: 2800000, guid: 6a4a197dfa1a0fa4697cdf4f747a6bd8, type: 3}
   restartButtonStyle:
@@ -442,7 +442,7 @@ PolygonCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 942615306}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

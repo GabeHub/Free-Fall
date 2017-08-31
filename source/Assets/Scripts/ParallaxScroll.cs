@@ -15,7 +15,10 @@ public class ParallaxScroll : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-         float backgroundOffset = offset * backgroundSpeed;
-         background.material.mainTextureOffset = new Vector2(0, backgroundOffset);
+        float backgroundOffset = offset * backgroundSpeed;
+        //if(backgroundOffset< background.material.mainTextureOffset.y)
+        //{
+            background.material.mainTextureOffset = new Vector2(0, backgroundOffset);
+        //}
     }
 }

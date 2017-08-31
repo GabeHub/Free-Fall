@@ -7,12 +7,11 @@
   <cell x="4" y="1" xSize="1" ySize="1" Type="diamond">diamond</cell>
   <cell x="5" y="2" xSize="1" ySize="1" Type="rotatable" Rotation="0">spikes</cell>
   <cell x="6" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
-  <cell x="7" y="0" xSize="1" ySize="1" Type="rotatable" Rotation="270">spikes</cell>
-  <cell x="8" y="0" xSize="1" ySize="1" Type="rotatable" Rotation="270">spikes</cell>
-  <cell x="9" y="2" xSize="1" ySize="1" Type="rotatable" Rotation="90">spikes</cell>
   <cell x="9" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
   <cell x="9" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="10" y="0" xSize="1" ySize="1" Type="rotatable" Rotation="270">spikes</cell>
   <cell x="10" y="4" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="11" y="0" xSize="1" ySize="1" Type="rotatable" Rotation="270">spikes</cell>
   <cell x="11" y="4" xSize="1" ySize="1" Type="diamond">diamond</cell>
   <cell x="12" y="4" xSize="1" ySize="1" Type="diamond">diamond</cell>
   <cell x="14" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
