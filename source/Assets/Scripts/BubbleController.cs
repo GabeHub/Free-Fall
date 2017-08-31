@@ -7,7 +7,7 @@ public class BubbleController : MonoBehaviour {
     private GameObject player;
     private bool isCollected = false;
     private float timer;
-    private float followingSpeed = 100.0f;
+    //private float followingSpeed = 1000.0f;
     private float timerTime = 5.0f;
 
 	// Use this for initialization
@@ -19,7 +19,8 @@ public class BubbleController : MonoBehaviour {
 	void FixedUpdate () {
             if (isCollected && player)
             {
-                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, followingSpeed * Time.fixedDeltaTime);
+                transform.position = new Vector2(player.transform.position.x, player.transform.position.y);
+                //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, followingSpeed * Time.fixedDeltaTime);
                 timer -= Time.fixedDeltaTime;
             }
             if (timer < 0)

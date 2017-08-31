@@ -319,7 +319,6 @@ public class RoomGenerator : MonoBehaviour
         if (levelNumber == 12)
         {
             levelNumber = 1;
-            levelPath = "Data/LevelG2Block";
         }
     }
 }

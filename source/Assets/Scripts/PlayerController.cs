@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     public float force;
     public float torque;
@@ -21,8 +22,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private int lvl;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         if (PlayerPrefs.HasKey("Level"))
         {
             lvl = PlayerPrefs.GetInt("Level");
@@ -30,12 +32,13 @@ public class PlayerController : MonoBehaviour {
         else lvl = 1;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         //Debug.Log(rb.velocity.y);
-        parallax.offset = transform.position.y;
+        parallax.offset = transform.position.y * 0.5f;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             rb.AddForce(new Vector2(-force, 0));
@@ -74,23 +77,23 @@ public class PlayerController : MonoBehaviour {
             Destroy(gameObject.GetComponent<Collider2D>());
             rb.AddForce(new Vector2(0, force * 3));
         }
-	}
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         int triggerHash = Animator.StringToHash("onHit");
         animator.SetTrigger(triggerHash);
-        if (collision.gameObject.CompareTag("BadBonus") && !isImmortal)
+        if (collision.gameObject.CompareTag("BadBonus"))
         {
-            Death(collision.gameObject.GetComponent<Collider2D>());
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("BadBonus") && isImmortal)
-        {
-            Destroy(bubble.gameObject);
+            if (isImmortal)
+            {
+                SwitchSpikes(collision);
+                Destroy(bubble.gameObject);
+            }
+            else
+            {
+                Death(collision.gameObject.GetComponent<Collider2D>());
+            }
         }
     }
 
@@ -111,16 +114,9 @@ public class PlayerController : MonoBehaviour {
             {
                 if (rb.velocity.y <= glassToBreak)
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 20);
-                    SetIsEmptyToTrue(collider);
+                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 10);
+                    RowDestroy(collider);
                     Destroy(collider.gameObject);
-                }
-                else
-                {
-                    if (collider.gameObject.name == "glassBlock(Clone)")
-                    {
-                        DestroyRow(collider);
-                    }
                 }
             }
             else if (collider.gameObject.CompareTag("Laser"))
@@ -145,7 +141,7 @@ public class PlayerController : MonoBehaviour {
             //laser death animation
         }
         else
-        {            
+        {
             //spike death animation
         }
     }
@@ -195,63 +191,14 @@ public class PlayerController : MonoBehaviour {
     void DisplayGameOver()
     {
         Rect buttonRect = new Rect(Screen.width * 0.1f, Screen.height * 0.45f, Screen.width * 0.8f, Screen.height * 0.15f);
-        if(GUI.Button(buttonRect, "Tap to restart", restartButtonStyle))
+        if (GUI.Button(buttonRect, "Tap to restart", restartButtonStyle))
         {
             //SceneManager.LoadScene(SceneManager.GetSceneByName("FreeFall").ToString());
             Application.LoadLevel(Application.loadedLevelName);
         }
     }
 
-    void DestroyRow(Collider2D collider)
-    {
-        float posY = collider.gameObject.transform.position.y + RoomGenerator.deltaY;
-        float posX = collider.transform.position.x;
-        bool flag = false;
-        for (int i = 0; i < RoomGenerator.raw; i++)
-        {
-            if (flag) break;
-            for (int j = 0; j < RoomGenerator.column; j++)
-            {
-                if (RoomGenerator.playerMatrix[i, j].xPosition == posX && RoomGenerator.playerMatrix[i, j].yPosition == posY)
-                {
-                    if (RoomGenerator.playerMatrix[i, j].obstacle) { }
-                    else
-                    {
-                        for (int k = j - 1; k >= 0; k--)
-                        {
-                            if (!RoomGenerator.playerMatrix[i, k].isEmpty)
-                            {
-                                if (RoomGenerator.playerMatrix[i, k].obstacle.CompareTag("Glass"))
-                                    {
-                                        Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
-                                        RoomGenerator.playerMatrix[i, k].isEmpty = true;
-                                    }
-                                    else break;
-                            }
-                            else break;
-                        }
-                        for (int k = j + 1; k < RoomGenerator.column; k++)
-                        {
-                            if (!RoomGenerator.playerMatrix[i, k].isEmpty)
-                            {
-                                if (RoomGenerator.playerMatrix[i, k].obstacle.CompareTag("Glass"))
-                                    {
-                                        Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
-                                        RoomGenerator.playerMatrix[i, k].isEmpty = true;
-                                    }
-                                    else break;
-                            }
-                            else break;
-                        }
-                        flag = true;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    public void SetIsEmptyToTrue(Collider2D collider)
+    void SetIsEmptyToTrue(Collider2D collider)
     {
         bool flag = false;
         for (int i = 0; i < RoomGenerator.raw; i++)
@@ -262,6 +209,45 @@ public class PlayerController : MonoBehaviour {
                 if (RoomGenerator.playerMatrix[i, j].xPosition == collider.gameObject.transform.position.x && RoomGenerator.playerMatrix[i, j].yPosition == collider.gameObject.transform.position.y)
                 {
                     RoomGenerator.playerMatrix[i, j].isEmpty = true;
+                    flag = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    void SwitchSpikes(Collision2D collision)
+    {
+        int triggerHash = Animator.StringToHash("switch");
+        animator = collision.gameObject.GetComponent<Animator>();
+        animator.SetTrigger(triggerHash);
+        collision.gameObject.tag = "Untagged";
+    }
+
+    void RowDestroy(Collider2D collider)
+    {
+        bool flag = false;
+        for (int i = 0; i < RoomGenerator.raw; i++)
+        {
+            if (flag) break;
+            for (int j = 0; j < RoomGenerator.column; j++)
+            {
+                if (RoomGenerator.playerMatrix[i, j].xPosition == collider.gameObject.transform.position.x && RoomGenerator.playerMatrix[i, j].yPosition == collider.gameObject.transform.position.y)
+                {
+                    RoomGenerator.playerMatrix[i, j].isEmpty = true;
+
+                    if (!RoomGenerator.playerMatrix[i + 1, j].isEmpty && RoomGenerator.playerMatrix[i + 1, j].obstacle.gameObject.name == "glassBlock(Clone)" && rb.velocity.y > glassToBreak)
+                    {
+                        for (int k = 0; k < RoomGenerator.column; k++)
+                        {
+                            if (RoomGenerator.playerMatrix[i, k].obstacle)
+                            {
+                                RoomGenerator.playerMatrix[i, k].isEmpty = true;
+                                Destroy(RoomGenerator.playerMatrix[i, k].obstacle.gameObject);
+                            }
+                        }
+                    }
+
                     flag = true;
                     break;
                 }
