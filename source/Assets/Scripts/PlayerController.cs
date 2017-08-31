@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -190,11 +191,16 @@ public class PlayerController : MonoBehaviour
 
     void DisplayGameOver()
     {
-        Rect buttonRect = new Rect(Screen.width * 0.1f, Screen.height * 0.45f, Screen.width * 0.8f, Screen.height * 0.15f);
-        if (GUI.Button(buttonRect, "Tap to restart", restartButtonStyle))
+        Rect button1Rect = new Rect(Screen.width * 0.1f, Screen.height * 0.3f, Screen.width * 0.8f, Screen.height * 0.15f);
+        if (GUI.Button(button1Rect, "Tap to restart", restartButtonStyle))
         {
-            //SceneManager.LoadScene(SceneManager.GetSceneByName("FreeFall").ToString());
-            Application.LoadLevel(Application.loadedLevelName);
+            SceneManager.LoadScene("FreeFall");
+        }
+
+        Rect button2Rect = new Rect(Screen.width * 0.1f, Screen.height * 0.5f, Screen.width * 0.8f, Screen.height * 0.15f);
+        if (GUI.Button(button2Rect, "Back to menu", restartButtonStyle))
+        {
+            SceneManager.LoadScene("MainScreen");
         }
     }
 

@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainScreenManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public GUIStyle buttonStyle;
+
+    // Use this for initialization
+    void Start () {
+
     }
 	
 	// Update is called once per frame
@@ -17,24 +20,27 @@ public class MainScreenManager : MonoBehaviour {
     void DisplayMainMenu()
     {
         Rect button1Rect = new Rect(Screen.width * 0.1f, Screen.height * 0.3f, Screen.width * 0.8f, Screen.height * 0.15f);
-        if (GUI.Button(button1Rect, "Block1"))
+        if (GUI.Button(button1Rect, "Block1", buttonStyle))
         {
             SceneManager.LoadScene("FreeFall");
             RoomGenerator.levelPath = "Data/LevelBlock";
-            SceneManager.UnloadSceneAsync("MainScreen");
         }
 
         Rect button2Rect = new Rect(Screen.width * 0.1f, Screen.height * 0.7f, Screen.width * 0.8f, Screen.height * 0.15f);
-        if (GUI.Button(button2Rect, "Block2"))
+        if (GUI.Button(button2Rect, "Block2", buttonStyle))
         {
             SceneManager.LoadScene("FreeFall");
             RoomGenerator.levelPath = "Data/LevelG2Block";
-            SceneManager.UnloadSceneAsync("MainScreen");
         }
     }
 
     private void OnGUI()
     {
         DisplayMainMenu();
+    }
+
+    public void SelectLevelNumber(string number)
+    {
+        RoomGenerator.startLevelNumber = int.Parse(number);
     }
 }

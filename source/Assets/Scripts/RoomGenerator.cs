@@ -43,7 +43,8 @@ public class RoomGenerator : MonoBehaviour
     public static float deltaY;
 
     public static string levelPath;
-    private int levelNumber = 1;
+    public static int startLevelNumber;
+    private int levelNumber;
 
     // Use this for initialization
     void Start()
@@ -73,6 +74,7 @@ public class RoomGenerator : MonoBehaviour
         matrix = new ObstacleMatrixCell[raw, column];
         playerMatrix = new ObstacleMatrixCell[raw, column];
         MatrixUpdate(cell);
+        levelNumber = startLevelNumber;
         InitMatrix(levelNumber);
         LevelUpdate();
         MatrixFilling();
