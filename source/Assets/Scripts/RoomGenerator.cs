@@ -318,7 +318,7 @@ public class RoomGenerator : MonoBehaviour
     void LevelUpdate()
     {
         levelNumber++;
-        if (levelNumber == 12)
+        if (levelNumber > 30)
         {
             levelNumber = 1;
         }

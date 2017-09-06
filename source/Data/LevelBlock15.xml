@@ -1,0 +1,30 @@
+<Information>
+  <cell x="5" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="6" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="7" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="8" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="9" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="13" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="13" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="13" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="13" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="13" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="14" y="1" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="14" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="14" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="14" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="15" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="15" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="15" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="15" y="3" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="16" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="16" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="16" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="16" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="17" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="17" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="17" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="18" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="18" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="18" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+</Information>

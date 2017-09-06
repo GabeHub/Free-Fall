@@ -27,6 +27,8 @@
   <cell x="11" y="1" xSize="1" ySize="1" Type="glassCorner">glassCorner1</cell>
   <cell x="11" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
   <cell x="11" y="3" xSize="1" ySize="1" Type="glassCorner">glassCorner4</cell>
+  <cell x="15" y="0" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="16" y="0" xSize="1" ySize="1" Type="diamond">diamond</cell>
   <cell x="17" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
   <cell x="17" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
   <cell x="17" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>

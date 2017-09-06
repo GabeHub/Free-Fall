@@ -10,6 +10,7 @@ public class Sliding : MonoBehaviour {
     public float effectorForceScale = 0.05f;
     private SurfaceEffector2D sf;
     private int direction;
+    private float borders = 0.25f;
 
     // Use this for initialization
     void Start () {
@@ -28,13 +29,13 @@ public class Sliding : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        transform.Translate(Vector2.right * speed * Time.fixedDeltaTime);
-        if (transform.position.x < -width / 2)
+        transform.Translate(Vector2.right * speed * Time.fixedDeltaTime);        
+        if (gameObject.GetComponentInChildren<Collider2D>().bounds.min.x - borders < -width / 2)
         {
             speed *= -1;
             sf.speed *= -1;
         }
-        else if(transform.position.x > width / 2)
+        else if(gameObject.GetComponentInChildren<Collider2D>().bounds.max.x + borders > width / 2)
         {
             speed *= -1;
             sf.speed *= -1;

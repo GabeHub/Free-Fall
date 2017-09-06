@@ -12,5 +12,5 @@
   <cell x="12" y="3" xSize="2" ySize="1" Type="glassBlock">glassBlock</cell>
   <cell x="14" y="1" xSize="1" ySize="1" Type="glassCorner">glassCorner1</cell>
   <cell x="14" y="2" xSize="1" ySize="1" Type="glassCorner">glassCorner4</cell>
-  <cell x="15" y="3" xSize="2" ySize="1" Type="gear" Direction="right">gear3</cell>
+  <cell x="15" y="3" xSize="2" ySize="1" Type="gear" Direction="left">gear3</cell>
 </Information>

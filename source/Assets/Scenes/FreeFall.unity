@@ -576,6 +576,16 @@ MonoBehaviour:
       type: 2}
   - objectPrefab: {fileID: 1113399112143830, guid: 12e22458fc4ceaf4c985cfca5611e2b6,
       type: 2}
+  - objectPrefab: {fileID: 1035690629826474, guid: 275c8d47223b57e4e8822048bff2c05a,
+      type: 2}
+  - objectPrefab: {fileID: 1188040698264204, guid: c301a4de5d3463b44baeb292a5bdc8d6,
+      type: 2}
+  - objectPrefab: {fileID: 1655206975395284, guid: d552a15a9254e7a4a9bef62a17ee0965,
+      type: 2}
+  - objectPrefab: {fileID: 1763398174524676, guid: 0b262730145ea53419f1dd8b0927be13,
+      type: 2}
+  - objectPrefab: {fileID: 1815864125930372, guid: d47a6f56589538c4691233a776d111e9,
+      type: 2}
   currentObjects: []
 --- !u!114 &1523260028
 MonoBehaviour:

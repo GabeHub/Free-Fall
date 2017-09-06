@@ -9,9 +9,12 @@
   <cell x="9" y="2" xSize="2" ySize="2" Type="gear" Direction="right">gear2</cell>
   <cell x="11" y="1" xSize="3" ySize="4" Type="gear" Direction="right">gear1</cell>
   <cell x="15" y="0" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="15" y="1" xSize="1" ySize="1" Type="diamond">diamond</cell>
   <cell x="16" y="1" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="16" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
   <cell x="16" y="4" xSize="1" ySize="1" Type="rotatable" Rotation="90">spikes</cell>
   <cell x="17" y="0" xSize="1" ySize="1" Type="rotatable" Rotation="270">spikes</cell>
   <cell x="17" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="17" y="3" xSize="1" ySize="1" Type="diamond">diamond</cell>
   <cell x="18" y="3" xSize="1" ySize="1" Type="diamond">diamond</cell>
 </Information>
