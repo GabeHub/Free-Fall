@@ -1,0 +1,30 @@
+<Information>
+  <cell x="1" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="1" y="1" xSize="2" ySize="2" Type="gear" Direction="left">gear2</cell>
+  <cell x="1" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="2" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="2" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="3" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="3" y="3" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="3" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="4" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="4" y="2" xSize="2" ySize="2" Type="gear" Direction="right">gear2</cell>
+  <cell x="4" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="5" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="5" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="6" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="6" y="2" xSize="2" ySize="2" Type="gear" Direction="left">gear2</cell>
+  <cell x="6" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="7" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="7" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="9" y="1" xSize="3" ySize="3" Type="gear" Direction="right">gear1</cell>
+  <cell x="12" y="3" xSize="2" ySize="1" Type="diamond">diamond</cell>
+  <cell x="13" y="0" xSize="2" ySize="2" Type="gear" Direction="right">gear2</cell>
+  <cell x="13" y="3" xSize="2" ySize="1" Type="diamond">diamond</cell>
+  <cell x="14" y="3" xSize="2" ySize="2" Type="gear" Direction="left">gear3</cell>
+  <cell x="16" y="0" xSize="2" ySize="2" Type="gear" Direction="right">gear3</cell>
+  <cell x="17" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="17" y="3" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="18" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="18" y="3" xSize="1" ySize="1" Type="diamond">diamond</cell>
+</Information>

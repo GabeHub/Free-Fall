@@ -1,0 +1,18 @@
+<Information>
+  <cell x="2" y="0" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="3" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="3" y="1" xSize="1" ySize="1" Type="glassCorner">glassCorner4</cell>
+  <cell x="5" y="4" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="6" y="3" xSize="1" ySize="1" Type="glassCorner">glassCorner1</cell>
+  <cell x="6" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="11" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="12" y="1" xSize="1" ySize="1" Type="glassCorner">glassCorner1</cell>
+  <cell x="12" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="12" y="3" xSize="1" ySize="1" Type="glassCorner">glassCorner4</cell>
+  <cell x="15" y="0" xSize="1" ySize="1" Type="glassCorner">glassCorner4</cell>
+  <cell x="16" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="16" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="17" y="4" xSize="1" ySize="1" Type="glassCorner">glassCorner1</cell>
+  <cell x="18" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="18" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+</Information>

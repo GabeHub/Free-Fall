@@ -1,0 +1,15 @@
+<Information>
+  <cell x="4" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="6" y="1" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="6" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="6" y="3" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="7" y="0" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="7" y="1" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="7" y="2" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="7" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="11" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="11" y="4" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
+  <cell x="14" y="3" xSize="2" ySize="1" Type="sliding">slidingBeam1</cell>
+  <cell x="16" y="2" xSize="1" ySize="1" Type="diamond">diamond</cell>
+  <cell x="17" y="1" xSize="2" ySize="1" Type="sliding">slidingBeam1</cell>
+</Information>

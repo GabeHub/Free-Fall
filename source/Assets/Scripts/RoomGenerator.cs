@@ -6,6 +6,8 @@ using System.IO;
 
 public class RoomGenerator : MonoBehaviour
 {
+    public static bool test = false;
+
     public GameObject player;
 
     public GameObject[] availableRooms;
@@ -46,7 +48,15 @@ public class RoomGenerator : MonoBehaviour
     public static int startLevelNumber;
     private int levelNumber;
 
-    //private int 
+    public static int grayBorder = 40;
+    public static int greenBorder = 50;
+    public static int blueBorder = 90;
+    private string levelCorlor = "";
+
+    private int grayLevelAmount;
+    private int greenLevelAmount;
+    private int blueLevelAmount;
+    private int redLevelAmount;
 
     // Use this for initialization
     void Start()
@@ -74,9 +84,18 @@ public class RoomGenerator : MonoBehaviour
         matrix = new ObstacleMatrixCell[raw, column];
         playerMatrix = new ObstacleMatrixCell[raw, column];
         MatrixUpdate(cell);
-        levelNumber = startLevelNumber;
+        levelNumber = startLevelNumber;        
+        InitLevelAmount();
+        if(!test) SelectRandomLevel();
         InitMatrix(levelNumber);
-        LevelUpdate();
+        if (test)
+        {
+            LevelUpdate();
+        }
+        else
+        {
+            SelectRandomLevel();
+        }
         MatrixFilling();
     }
 
@@ -159,6 +178,14 @@ public class RoomGenerator : MonoBehaviour
             cell.isEmpty = true;
             MatrixUpdate(cell);
             InitMatrix(levelNumber);
+            if (test)
+            {
+                LevelUpdate();
+            }
+            else
+            {
+                SelectRandomLevel();
+            }
             LevelUpdate();
             MatrixFilling();
         }
@@ -280,7 +307,7 @@ public class RoomGenerator : MonoBehaviour
 
     void InitMatrix(int number)
     {
-        if (File.Exists(levelPath + number + ".xml"))
+        if (File.Exists(levelPath + levelCorlor + number + ".xml"))
         {
             XmlTextReader xtr;
 
@@ -288,7 +315,7 @@ public class RoomGenerator : MonoBehaviour
             {
                 for (int j = 0; j < column; j++)
                 {
-                    xtr = new XmlTextReader(levelPath + number + ".xml");
+                    xtr = new XmlTextReader(levelPath + levelCorlor + number + ".xml");
                     while (xtr.Read())
                     {
                         if (xtr.IsStartElement("cell") && !xtr.IsEmptyElement && int.Parse(xtr.GetAttribute("x").ToString()) == i && int.Parse(xtr.GetAttribute("y").ToString()) == j)
@@ -312,7 +339,7 @@ public class RoomGenerator : MonoBehaviour
                 }
             }
         }
-        else Debug.Log("There is no such file: " + levelPath + number + ".xml");
+        else Debug.Log("There is no such file: " + levelPath + levelCorlor + number + ".xml");
     }
 
     void LevelUpdate()
@@ -324,8 +351,78 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 
-    void RandomLevel()
+    void SelectRandomLevel()
     {
+        int rand = Random.Range(0, 101);
+        if (rand < grayBorder)
+        {
+            rand = Random.Range(1, grayLevelAmount);
+            if(levelNumber == rand && levelCorlor == "Gray")
+            {
+                SelectRandomLevel();
+            }
+            else
+            {
+                levelNumber = rand;
+                levelCorlor = "Gray";
+            }
+        }
+        else if (rand < greenBorder)
+        {
+            rand = Random.Range(1, greenLevelAmount);
+            if (levelNumber == rand && levelCorlor == "Green")
+            {
+                SelectRandomLevel();
+            }
+            else
+            {
+                levelNumber = rand;
+                levelCorlor = "Green";
+            }
+        }
+        else if (rand < blueBorder)
+        {
+            rand = Random.Range(1, blueLevelAmount);
+            if (levelNumber == rand && levelCorlor == "Blue")
+            {
+                SelectRandomLevel();
+            }
+            else
+            {
+                levelNumber = rand;
+                levelCorlor = "Blue";
+            }
+        }
+        else
+        {
+            rand = Random.Range(1, redLevelAmount);
+            if (levelNumber == rand && levelCorlor == "Red")
+            {
+                SelectRandomLevel();
+            }
+            else
+            {
+                levelNumber = rand;
+                levelCorlor = "Red";
+            }
+        }
+    }
 
+    void InitLevelAmount()
+    {
+        if (levelPath== "Data/LevelBlock")
+        {
+            grayLevelAmount = 9;
+            greenLevelAmount = 8;
+            blueLevelAmount = 7;
+            redLevelAmount = 6;
+        }
+        else
+        {
+            grayLevelAmount = 5;
+            greenLevelAmount = 10;
+            blueLevelAmount = 5;
+            redLevelAmount = 10;
+        }
     }
 }

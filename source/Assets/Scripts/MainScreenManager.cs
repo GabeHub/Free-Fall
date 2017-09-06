@@ -23,14 +23,22 @@ public class MainScreenManager : MonoBehaviour {
         if (GUI.Button(button1Rect, "Block1", buttonStyle))
         {
             SceneManager.LoadScene("FreeFall");
-            RoomGenerator.levelPath = "Data/LevelBlock";
+            if (RoomGenerator.test)
+            {
+                RoomGenerator.levelPath = "Data/Test/LevelBlock";
+            }
+            else RoomGenerator.levelPath = "Data/LevelBlock";
         }
 
         Rect button2Rect = new Rect(Screen.width * 0.1f, Screen.height * 0.7f, Screen.width * 0.8f, Screen.height * 0.15f);
         if (GUI.Button(button2Rect, "Block2", buttonStyle))
         {
             SceneManager.LoadScene("FreeFall");
-            RoomGenerator.levelPath = "Data/LevelG2Block";
+            if (RoomGenerator.test)
+            {
+                RoomGenerator.levelPath = "Data/Test/LevelG2Block";
+            }
+            else RoomGenerator.levelPath = "Data/LevelG2Block";
         }
     }
 
@@ -42,5 +50,10 @@ public class MainScreenManager : MonoBehaviour {
     public void SelectLevelNumber(string number)
     {
         RoomGenerator.startLevelNumber = int.Parse(number);
+        if (int.Parse(number) == 0)
+        {
+            RoomGenerator.test = false;
+        }
+        else RoomGenerator.test = true;
     }
 }

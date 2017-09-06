@@ -73,11 +73,11 @@ public class PlayerController : MonoBehaviour
             isImmortal = false;
         }
 
-        if (isDead)
-        {
-            Destroy(gameObject.GetComponent<Collider2D>());
-            rb.AddForce(new Vector2(0, force * 3));
-        }
+        //if (isDead)
+        //{
+        //    Destroy(gameObject.GetComponent<Collider2D>());
+        //    rb.AddForce(new Vector2(0, force * 3));
+        //}
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -198,7 +198,16 @@ public class PlayerController : MonoBehaviour
         }
 
         Rect button2Rect = new Rect(Screen.width * 0.1f, Screen.height * 0.5f, Screen.width * 0.8f, Screen.height * 0.15f);
-        if (GUI.Button(button2Rect, "Back to menu", restartButtonStyle))
+        if (GUI.Button(button2Rect, "Continue", restartButtonStyle))
+        {
+            RoomGenerator.grayBorder = 25;
+            RoomGenerator.greenBorder = 50;
+            RoomGenerator.blueBorder = 75;
+            SceneManager.LoadScene("FreeFall");
+        }
+
+        Rect button3Rect = new Rect(Screen.width * 0.1f, Screen.height * 0.7f, Screen.width * 0.8f, Screen.height * 0.15f);
+        if (GUI.Button(button3Rect, "Back to menu", restartButtonStyle))
         {
             SceneManager.LoadScene("MainScreen");
         }
@@ -241,7 +250,7 @@ public class PlayerController : MonoBehaviour
                 if (RoomGenerator.playerMatrix[i, j].xPosition == collider.gameObject.transform.position.x && RoomGenerator.playerMatrix[i, j].yPosition == collider.gameObject.transform.position.y)
                 {
                     RoomGenerator.playerMatrix[i, j].isEmpty = true;
-
+                    if(i + 1 < RoomGenerator.raw)
                     if (!RoomGenerator.playerMatrix[i + 1, j].isEmpty && RoomGenerator.playerMatrix[i + 1, j].obstacle.gameObject.name == "glassBlock(Clone)" && rb.velocity.y > glassToBreak)
                     {
                         for (int k = 0; k < RoomGenerator.column; k++)
