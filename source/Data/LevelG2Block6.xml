@@ -1,5 +1,5 @@
 <Information>
-  <cell x="1" y="0" xSize="2" ySize="2" Type="rotatable" Rotation="0">beam</cell>
+  <cell x="1" y="0" xSize="2" ySize="2" Type="sliding">slidingBeam1</cell>
   <cell x="2" y="4" xSize="1" ySize="1" Type="diamond">diamond</cell>
   <cell x="3" y="1" xSize="2" ySize="2" Type="gear" Direction="right">gear2</cell>
   <cell x="5" y="3" xSize="2" ySize="2" Type="gear" Direction="left">gear2</cell>

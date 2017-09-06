@@ -46,6 +46,8 @@ public class RoomGenerator : MonoBehaviour
     public static int startLevelNumber;
     private int levelNumber;
 
+    //private int 
+
     // Use this for initialization
     void Start()
     {
@@ -54,8 +56,6 @@ public class RoomGenerator : MonoBehaviour
 
         deltaX = (width / column);
         deltaY = (2.0f * height / raw);
-
-        //SortObstacles();
 
         float firstRoomPosition = 2.0f * height * 0.5f;
         AddRoom(firstRoomPosition);
@@ -322,5 +322,10 @@ public class RoomGenerator : MonoBehaviour
         {
             levelNumber = 1;
         }
+    }
+
+    void RandomLevel()
+    {
+
     }
 }

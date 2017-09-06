@@ -1,6 +1,6 @@
 <Information>
-  <cell x="2" y="0" xSize="2" ySize="1" Type="rotatable" Rotation="0">beam</cell>
-  <cell x="4" y="3" xSize="2" ySize="1" Type="rotatable" Rotation="0">beam</cell>
+  <cell x="2" y="0" xSize="2" ySize="1" Type="sliding">slidingBeam1</cell>
+  <cell x="4" y="3" xSize="2" ySize="1" Type="sliding">slidingBeam1</cell>
   <cell x="6" y="3" xSize="1" ySize="1" Type="diamond">diamond</cell>
   <cell x="7" y="3" xSize="1" ySize="1" Type="glassBlock">glassBlock</cell>
   <cell x="8" y="1" xSize="1" ySize="1" Type="rotatable" Rotation="0">spikes</cell>
